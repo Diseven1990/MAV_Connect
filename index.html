@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0b0f" />
+  <title>MAV Connect</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-block">
+        <div class="brand-logo" aria-label="MAV Connect">MAV</div>
+        <div>
+          <h1>MAV Connect</h1>
+          <p>Novidades das áreas de Marketing, Audiovisuais e Videojogos.</p>
+        </div>
+      </div>
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Alternar tema">☾</button>
+    </header>
+
+    <main>
+      <section class="hero-card">
+        <span class="eyebrow">Área MAV</span>
+        <h2>O essencial, num feed simples.</h2>
+        <p>Consulta rápida das novidades, destaques e comunicações das três áreas.</p>
+      </section>
+
+      <section class="controls" id="searchPanel">
+        <label class="search-box" for="searchInput">
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="Procurar novidades..." autocomplete="off" />
+        </label>
+
+        <div class="category-tabs" role="tablist" aria-label="Filtrar por área">
+          <button class="tab active" type="button" data-category="Todos">Todos</button>
+          <button class="tab" type="button" data-category="Marketing">Marketing</button>
+          <button class="tab" type="button" data-category="Audiovisuais">Audiovisuais</button>
+          <button class="tab" type="button" data-category="Videojogos">Videojogos</button>
+        </div>
+      </section>
+
+      <section class="section-block" id="featuredSection">
+        <div class="section-title">
+          <h3>Destaques</h3>
+          <span>Primeiro o mais importante</span>
+        </div>
+        <div class="featured-feed" id="featuredFeed"></div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-title">
+          <h3>Últimas novidades</h3>
+          <span id="resultCount">A carregar...</span>
+        </div>
+        <div class="feed" id="newsFeed"></div>
+      </section>
+
+      <div class="empty-state hidden" id="emptyState">
+        <div class="empty-icon">⌁</div>
+        <h3>Sem resultados</h3>
+        <p>Experimenta pesquisar por outro termo ou mudar de área.</p>
+      </div>
+    </main>
+  </div>
+
+  <nav class="bottom-nav" aria-label="Navegação principal">
+    <button class="nav-item active" type="button" data-view="home">
+      <span>⌂</span>
+      <small>Home</small>
+    </button>
+    <button class="nav-item" type="button" data-view="featured">
+      <span>◆</span>
+      <small>Destaques</small>
+    </button>
+    <button class="nav-item" type="button" data-view="search">
+      <span>⌕</span>
+      <small>Pesquisa</small>
+    </button>
+    <a class="nav-item" href="admin.html">
+      <span>＋</span>
+      <small>Admin</small>
+    </a>
+  </nav>
+
+  <div class="modal-backdrop hidden" id="newsModal" aria-hidden="true">
+    <article class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="closeModal" type="button" aria-label="Fechar notícia">×</button>
+      <div class="modal-image-wrap">
+        <img id="modalImage" src="" alt="" />
+      </div>
+      <div class="modal-content">
+        <div class="modal-meta">
+          <span id="modalCategory" class="pill"></span>
+          <span id="modalDate"></span>
+        </div>
+        <h2 id="modalTitle"></h2>
+        <p id="modalSummary" class="modal-summary"></p>
+        <div id="modalBody" class="modal-body"></div>
+        <div id="modalAttachments" class="attachments"></div>
+      </div>
+    </article>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
