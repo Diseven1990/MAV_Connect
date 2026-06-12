@@ -69,17 +69,50 @@ function renderList(){
           <span class="badge">${formatDate(n.data_publicacao || n.created_at)}</span>
         </div>
       </div>
-      <div class="actions">
-        <button class="ghost" type="button" data-edit="${n.id}">Editar</button>
-        <button class="ghost" type="button" data-archive="${n.id}">${n.publicado ? 'Arquivar' : 'Republicar'}</button>
-        <button class="danger" type="button" data-delete="${n.id}">Eliminar</button>
-      </div>
+   <div class="actions">
+  <button class="ghost" type="button" data-edit="${n.id}">Editar</button>
+${n.publicado ? `<button class="ghost" type="button" data-whatsapp="${n.id}">WhatsApp</button>` : ''}
+  <button class="ghost" type="button" data-archive="${n.id}">
+    ${n.publicado ? 'Arquivar' : 'Republicar'}
+  </button>
+  <button class="danger" type="button" data-delete="${n.id}">
+    Eliminar
+  </button>
+</div>
     </article>`).join('');
 
-  document.querySelectorAll('[data-edit]').forEach(btn => btn.addEventListener('click', () => editNews(btn.dataset.edit)));
-  document.querySelectorAll('[data-archive]').forEach(btn => btn.addEventListener('click', () => togglePublished(btn.dataset.archive)));
-  document.querySelectorAll('[data-delete]').forEach(btn => btn.addEventListener('click', () => deleteNews(btn.dataset.delete)));
+document.querySelectorAll('[data-edit]')
+  .forEach(btn =>
+    btn.addEventListener('click', () =>
+      editNews(btn.dataset.edit)
+    )
+  );
+
+document.querySelectorAll('[data-whatsapp]')
+  .forEach(btn =>
+    btn.addEventListener(
+      'click',
+      () => shareWhatsApp(btn.dataset.whatsapp)
+    )
+  );
+
+document.querySelectorAll('[data-archive]')
+  .forEach(btn =>
+    btn.addEventListener(
+      'click',
+      () => togglePublished(btn.dataset.archive)
+    )
+  );
+
+document.querySelectorAll('[data-delete]')
+  .forEach(btn =>
+    btn.addEventListener(
+      'click',
+      () => deleteNews(btn.dataset.delete)
+    )
+  );
 }
+
 
 async function saveNews(e){
   e.preventDefault();
@@ -186,3 +219,37 @@ async function deleteNews(id){
 function within5(value){ if(!value) return false; return ((Date.now() - new Date(value).getTime()) / 86400000) <= 5; }
 function formatDate(value){ if(!value) return ''; return new Intl.DateTimeFormat('pt-PT',{day:'2-digit',month:'short',year:'numeric'}).format(new Date(value)); }
 function escapeHtml(value){ return String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;'); }
+
+const PUBLIC_SITE =
+  'https://diseven1990.github.io/MAV_Connect/';
+
+function shareWhatsApp(id) {
+
+  const noticia =
+    adminState.noticias.find(
+      n => String(n.id) === String(id)
+    );
+
+  if (!noticia) return;
+
+  const link =
+    `${PUBLIC_SITE}?id=${encodeURIComponent(id)}`;
+
+  const mensagem =
+`📢 Nova notícia disponível no MAV Connect
+
+${noticia.titulo}
+
+${noticia.resumo || ''}
+
+Leia aqui:
+${link}`;
+
+  const whatsappUrl =
+    `https://wa.me/?text=${encodeURIComponent(mensagem)}`;
+
+  window.open(
+    whatsappUrl,
+    '_blank'
+  );
+}
