@@ -1,0 +1,12 @@
+Marketing Update V3.3
+
+Parti da V3.2 enviada pelo Diogo.
+
+Alterações feitas:
+- Mantido o layout da V3.2.
+- Ligações das visualizações atualizadas para visualizacoes.conteudo_id e visualizacoes.device_id.
+- Ligações das reações atualizadas para reacoes.conteudo_id e reacoes.device_id.
+- Dashboard do admin atualizado para ler conteudo_id/device_id.
+- Mantida a tabela principal como noticias.
+- Mantidos os anexos com noticia_id, porque essa tabela já estava assim no projeto original.
+

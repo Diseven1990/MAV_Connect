@@ -1,0 +1,12 @@
+Marketing Update V3
+
+Alterações previstas nesta versão:
+- Reação discreta: '🔥 Clique aqui se gostou deste conteúdo.'
+- Contador apenas quando existir pelo menos uma reação.
+- Dashboard final preparado para estatísticas.
+- Sem categorias.
+- Sem hero.
+- Feed direto de conteúdos.
+
+Passo seguinte:
+Configuração das tabelas e políticas do Supabase.
